@@ -85,12 +85,14 @@ def borrow_book():
 
   for book in books:
     if book.title.lower() == title.lower():
-      if book.borrowed:
+
+      # Kollar ifall boken är utlånad ochde 7 dagar inte har gått ut ännu
+      if book.borrowed and not book.is_available():
         print("Boken är redan utlånad.")
         print(f"Den kommer finnas tillgänglig: {book.available_at.strftime('%Y-%m-%d')}")
       else:
-        book.borrowed = True
-        book.borrow()
+        book.borrowed = True # Markerar boken som utlånad
+        book.borrow() # Sätter återlämningsdatum
         print("Du har lånat boken.")
         print(f"Lämna tillbaka senast: {book.available_at.strftime('%Y-%m-%d')}")
 
@@ -120,13 +122,13 @@ while True:
 
   # Printar ut en interface.
   print("""
-      --- BIBLIOTEK ---
-      1. Visa alla böcker
-      2. Lägg till bok
-      3. Sök efter bok
-      4. Låna bok
-      5. Lämna tillbaka bok
-      6. Avsluta
+    --- BIBLIOTEK ---
+    1. Visa alla böcker
+    2. Lägg till bok
+    3. Sök efter bok
+    4. Låna bok
+    5. Lämna tillbaka bok
+    6. Avsluta
     """)
 
   # Användaren input sparas.
