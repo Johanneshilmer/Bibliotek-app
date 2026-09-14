@@ -119,13 +119,15 @@ def return_book():
 while True:
 
   # Printar ut en interface.
-  print("\n--- BIBLIOTEK ---")
-  print("1. Visa alla böcker")
-  print("2. Lägg till bok")
-  print("3. Sök efter bok")
-  print("4. Låna bok")
-  print("5. Lämna tillbaka bok")
-  print("6. Avsluta")
+  print("""
+      --- BIBLIOTEK ---
+      1. Visa alla böcker
+      2. Lägg till bok
+      3. Sök efter bok
+      4. Låna bok
+      5. Lämna tillbaka bok
+      6. Avsluta
+    """)
 
   # Användaren input sparas.
   choice = input("Välj ett alternativ: ")
