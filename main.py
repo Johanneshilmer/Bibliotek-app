@@ -1,4 +1,3 @@
-from datetime import datetime, timedelta
 
 # Använder en class för att skapa objekt för böckerna.
 class Book:
@@ -6,17 +5,6 @@ class Book:
     self.title = title
     self.author = author
     self.borrowed = False
-    self.available_at = datetime.now()
-
-  # ---Metoder---
-  # Lägger på 7 dagar på dagens datum
-  def borrow(self):
-    self.available_at = datetime.now() + timedelta(days=7)
-
-  # Ser ifall boken är tillgänging efter utlåning
-  def is_available(self): 
-    return datetime.now() >= self.available_at
-  
 
 
 # Böcker som redan finns i biblioteket.
@@ -28,10 +16,21 @@ book4 = Book("Nils Holgerssons underbara resa", "Selma Lagerlöf")
 # Lista som håller alla böcker.
 books = [book1, book2, book3, book4]
 
-# Funktion som ber om 2 parametrar och med hjälp av Book classen skapar ett objekt som läggs till i book listan.
+# Funktion som ber om 2 inputs och med hjälp av Book classen skapar ett objekt som läggs till i book listan.
 def add_book():
   title = input("Titel: ")
+
+  # Kontrollerar ifall input är tomt
+  while not title.strip():
+    print("Titeln får inte vara tom.")
+    title = input("Titel: ")
+
   author = input("Författare: ")
+
+  # Kontrollerar ifall input är tomt
+  while not author.strip():
+    print("Författare får inte vara tom.")
+    author = input("Författare: ")
 
   book = Book(title, author)
   books.append(book)
@@ -51,7 +50,7 @@ def show_books():
 
     for book in books:
       if book.borrowed:
-        status = f"Utlånad till {book.available_at.strftime('%Y-%m-%d')}"
+        status = "Utlånad"
       else:
         status = "Tillgänglig"
 
@@ -67,7 +66,7 @@ def search_book():
   for book in books:
     if search.lower() in book.title.lower() or search.lower() in book.author.lower():
       if book.borrowed:
-        status = f"Utlånad till {book.available_at.strftime('%Y-%m-%d')}"
+        status = "Utlånad"
       else:
         status = "Tillgänglig"
 
@@ -86,21 +85,18 @@ def borrow_book():
   for book in books:
     if book.title.lower() == title.lower():
 
-      # Kollar ifall boken är utlånad ochde 7 dagar inte har gått ut ännu
-      if book.borrowed and not book.is_available():
+      # Kontrollerar om boken redan är utlånad
+      if book.borrowed:
         print("Boken är redan utlånad.")
-        print(f"Den kommer finnas tillgänglig: {book.available_at.strftime('%Y-%m-%d')}")
       else:
         book.borrowed = True # Markerar boken som utlånad
-        book.borrow() # Sätter återlämningsdatum
         print("Du har lånat boken.")
-        print(f"Lämna tillbaka senast: {book.available_at.strftime('%Y-%m-%d')}")
-
       return
 
   print("Boken hittades inte.")
 
-# Funktion för att retunera en bok
+
+# Funktion för att returnera en bok
 def return_book():
   title = input("Vilken bok vill du lämna tillbaka? ")
 
@@ -120,7 +116,7 @@ def return_book():
 # while loop som driver programmet så länge den är True.
 while True:
 
-  # Printar ut en interface.
+  # Skriver ut programmets meny.
   print("""
     --- BIBLIOTEK ---
     1. Visa alla böcker
