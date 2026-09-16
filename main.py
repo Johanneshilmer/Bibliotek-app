@@ -1,5 +1,5 @@
 
-# Använder en class för att skapa objekt för böckerna.
+# Class som skapar objekt för böcker
 class Book:
   def __init__(self, title, author):
     self.title = title
@@ -7,16 +7,17 @@ class Book:
     self.borrowed = False
 
 
-# Böcker som redan finns i biblioteket.
+
 book1 = Book("Harry Potter", "J.K Rowling")
 book2 = Book("Pippi Långstrump", "Astrid Lindgren")
 book3 = Book("Röda rummet", "August Strindberg")
 book4 = Book("Nils Holgerssons underbara resa", "Selma Lagerlöf")
 
-# Lista som håller alla böcker.
+
 books = [book1, book2, book3, book4]
 
-# Funktion som ber om 2 inputs och med hjälp av Book classen skapar ett objekt som läggs till i book listan.
+
+# Funktion för att skapa nya objekt
 def add_book():
   title = input("Titel: ")
 
@@ -27,7 +28,7 @@ def add_book():
 
   author = input("Författare: ")
 
-  # Kontrollerar ifall input är tomt
+
   while not author.strip():
     print("Författare får inte vara tom.")
     author = input("Författare: ")
@@ -38,10 +39,9 @@ def add_book():
   print("Boken har lagts till.")
 
  
-# Funktion som visar alla böcker i books listan (biblioteket).
+# Funktion som loopar ut alla objekt i books
 def show_books():
 
-  # Om inga böcker i listan finns körs denna.
   if len(books) == 0:
       print("Det finns inga böcker i biblioteket.")
 
@@ -57,11 +57,11 @@ def show_books():
       print(f"{book.title} - {book.author} ({status})")
 
 
-# Funktion för att söka efter böker.
+# Funktion för att söka efter böker
 def search_book():
   search = input("Sök efter titel eller författare: ")
 
-  found = False ## Sätter false innan loopen körs, ifall vi inte hittar nån bok.
+  found = False # Flagga för att hålla koll ifall nån bok hittas
 
   for book in books:
     if search.lower() in book.title.lower() or search.lower() in book.author.lower():
@@ -71,7 +71,7 @@ def search_book():
         status = "Tillgänglig"
 
       print(f"{book.title} - {book.author} ({status})")
-      found = True # Hittar vi en eller fler böcker sätt den till true
+      found = True
 
   # Om ingen bok hittas körs
   if not found:
@@ -89,7 +89,7 @@ def borrow_book():
       if book.borrowed:
         print("Boken är redan utlånad.")
       else:
-        book.borrowed = True # Markerar boken som utlånad
+        book.borrowed = True
         print("Du har lånat boken.")
       return
 
@@ -116,7 +116,7 @@ def return_book():
 # while loop som driver programmet så länge den är True.
 while True:
 
-  # Skriver ut programmets meny.
+
   print("""
     --- BIBLIOTEK ---
     1. Visa alla böcker
@@ -127,10 +127,9 @@ while True:
     6. Avsluta
     """)
 
-  # Användaren input sparas.
   choice = input("Välj ett alternativ: ")
 
-  # IF statements beroende på val.
+
   if choice == "1":
     show_books()
 
@@ -150,7 +149,6 @@ while True:
     print("Programmet avslutas.")
     break
 
-  # Fångar upp ogiltigt val.
   else:
     print("Ogiltigt val. Försök igen.")
 
