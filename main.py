@@ -80,7 +80,7 @@ def search_book():
 
 # Funktion för att låna en bok
 def borrow_book():
-  title = input("Vilken bok vill du låna? ")
+  title = input("Vilken bok vill du låna (title)? ")
 
   for book in books:
     if book.title.lower() == title.lower():
