@@ -83,7 +83,7 @@ def borrow_book():
   title = input("Vilken bok vill du låna (title)? ")
 
   for book in books:
-    if book.title.lower() == title.lower():
+    if title.lower() == book.title.lower():
 
       # Kontrollerar om boken redan är utlånad
       if book.borrowed:
@@ -101,7 +101,7 @@ def return_book():
   title = input("Vilken bok vill du lämna tillbaka? ")
 
   for book in books:
-    if book.title.lower() == title.lower():
+    if title.lower() == book.title.lower():
       if book.borrowed:
         book.borrowed = False
         print("Boken har lämnats tillbaka.")
